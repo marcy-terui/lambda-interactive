@@ -1,4 +1,4 @@
-Run the bash shell interactively on Lambda Custom Runtime via ngrok
+Run the bash shell interactively on Lambda Custom Runtime
 ======
 
 # Requirements
@@ -38,5 +38,5 @@ telnet $YOUR_NGROK_ENDPOINT $YOUR_NGROK_PORT
 # End interaction
 
 ```
-exit
+bash-4.2$ touch /tmp/exit
 ```

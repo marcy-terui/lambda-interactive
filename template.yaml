@@ -1,0 +1,36 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+    Run the bash shell interactively on Lambda Custom Runtime
+
+Globals:
+  Function:
+    Timeout: 300
+    MemorySize: 1024
+
+Parameters:
+  NgrokAuthToken:
+    Type: String
+
+Resources:
+
+  StartFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: artifacts/
+      Handler: lambda_handler
+      Runtime: provided
+      Environment:
+        Variables:
+          NGROK_AUTH_TOKEN: !Ref NgrokAuthToken
+      Events:
+        Interact:
+          Type: Api
+          Properties:
+            Path: /start
+            Method: get
+
+Outputs:
+  InteractApi:
+    Description: "API Gateway endpoint URL for Prod stage for StartFunction"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/start/"
